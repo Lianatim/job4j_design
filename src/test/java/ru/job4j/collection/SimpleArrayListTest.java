@@ -37,7 +37,7 @@ class SimpleArrayListTest {
     @Test
     void whenRemoveThenGetValueAndSizeDecrease() {
         assertThat(list.remove(1)).isEqualTo(2);
-        //assertThat(list.size()).isEqualTo(2);
+        assertThat(list.size()).isEqualTo(2);
     }
 
     @Test
