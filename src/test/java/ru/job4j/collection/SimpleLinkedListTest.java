@@ -2,6 +2,7 @@ package ru.job4j.collection;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -93,7 +94,7 @@ class SimpleLinkedListTest {
 
     @Test
     void whenNoSuchElementException() {
-        List<Integer> empty = Collections. emptyList();
+        List<Integer> empty = Collections.emptyList();
         assertThatThrownBy(() -> empty.iterator().next())
                 .isInstanceOf(NoSuchElementException.class);
     }
