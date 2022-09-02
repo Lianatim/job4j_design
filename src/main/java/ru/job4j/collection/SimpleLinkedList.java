@@ -24,19 +24,12 @@ public class SimpleLinkedList<E> implements LinkedList<E> {
 
     @Override
     public E get(int index) {
-       E rsl = null;
         Objects.checkIndex(index, size);
-        int currentIndex = 0;
         Node<E> currentElement = first;
-        for (int i = 0; i <= index; i++) {
-            if (currentIndex == index) {
-                rsl = currentElement.item;
-                break;
-            }
+        for (int i = 0; i < index; i++) {
             currentElement = currentElement.next;
-            currentIndex++;
         }
-        return rsl;
+        return currentElement.item;
     }
 
     @Override
