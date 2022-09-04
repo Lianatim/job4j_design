@@ -20,9 +20,8 @@ public class ForwardLinked<T> implements Iterable<T> {
     }
 
     public boolean revert() {
-        if (isEmpty() || head.next == null) {
-            return false;
-        }
+        boolean rsl = !(isEmpty() || head.next == null);
+        if (rsl) {
             Node<T> newNode = head.next;
             head.next = null;
             while (newNode != null) {
@@ -31,8 +30,9 @@ public class ForwardLinked<T> implements Iterable<T> {
                 head = newNode;
                 newNode = tmp;
             }
-            return true;
         }
+        return rsl;
+    }
 
     public T deleteFirst() {
         if (head == null) {
