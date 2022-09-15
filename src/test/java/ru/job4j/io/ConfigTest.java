@@ -19,7 +19,7 @@ class ConfigTest {
         Config config = new Config(path);
         config.load();
         assertThat(config.value("name")).isEqualTo("Liana");
-        assertThat(config.value("age")).isEqualTo("75");
+        assertThat(config.value("age")).isEqualTo("76");
     }
 
     @Test
