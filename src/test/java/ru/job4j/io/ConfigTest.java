@@ -1,6 +1,7 @@
 package ru.job4j.io;
 
 import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.*;
 
 class ConfigTest {
@@ -34,6 +35,23 @@ class ConfigTest {
     @Test
     void whenPairInvalid() {
         String path = "./data/pair_with_start_with=_lines.properties";
+        Config config = new Config(path);
+        assertThatThrownBy(config::load)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("pattern violation");
+    }
+
+    @Test
+    void whenPairWithValueContainsSymbol() {
+        String path = "./data/pair_with_value_contains=.properties";
+        Config config = new Config(path);
+        config.load();
+        assertThat(config.value("name")).isEqualTo("Liana=");
+    }
+
+    @Test
+    void whenPairContainsSymbol() {
+        String path = "./data/pair_contains=.properties";
         Config config = new Config(path);
         assertThatThrownBy(config::load)
                 .isInstanceOf(IllegalArgumentException.class)

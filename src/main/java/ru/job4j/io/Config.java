@@ -15,18 +15,22 @@ public class Config {
         this.path = path;
     }
 
+    private boolean validate(String line) {
+        boolean rsl = !line.startsWith("=") && line.matches("(.*)=(.*)");
+        if (!rsl) {
+            throw new IllegalArgumentException("pattern violation");
+        }
+        return rsl;
+    }
+
 
     public void load() {
         try (BufferedReader in = new BufferedReader(new FileReader(this.path))) {
             in.lines()
-                    .peek(s -> {
-                        if (s.startsWith("=") || s.endsWith("=")) {
-                            throw new IllegalArgumentException("pattern violation");
-                        }
-                    })
                     .filter(s -> !s.isEmpty())
                     .filter(s -> !s.startsWith("#"))
-                    .map(s -> s.split("="))
+                    .filter(this::validate)
+                    .map(s -> s.split("=", 2))
                     .forEach(key -> values.put(key[0], key[1]));
         } catch (IOException e) {
             e.printStackTrace();
