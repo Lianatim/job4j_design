@@ -13,12 +13,15 @@ public class Analizy {
                      ))) {
             for (String line = in.readLine(); line != null; line = in.readLine()) {
                 String[] arr = line.split(" ");
-                if (on.isEmpty() && (arr[0].equals("400") || arr[0].equals("500"))) {
+                if (on.isEmpty() && ("400".equals(arr[0]) || "500".equals(arr[0]))) {
                     on = arr[1];
                     of = "";
-                } else if (of.isEmpty() && !on.isEmpty() && (arr[0].equals("200") || arr[0].equals("300"))) {
+                } else if (of.isEmpty() && !on.isEmpty() && ("200".equals(arr[0]) || "300".equals(arr[0]))) {
                     of = arr[1];
-                    out.write(on + ";" + of + ";");
+                    out.write(String.valueOf((new StringBuilder())
+                            .append(on).append(";")
+                            .append(of).append(";")
+                            .append(System.lineSeparator())));
                     on = "";
                 }
             }
