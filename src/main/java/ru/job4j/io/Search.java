@@ -9,8 +9,10 @@ import java.util.function.Predicate;
 
 public class Search {
     public static void main(String[] args) throws IOException {
-        Path start = Paths.get(".");
-        search(start, p -> p.toFile().getName().endsWith(".js")).forEach(System.out::println);
+        if (validate(args)) {
+            Path start = Paths.get(args[0]);
+            search(start, p -> p.toFile().getName().endsWith(args[1])).forEach(System.out::println);
+        }
     }
 
     public static List<Path> search(Path root, Predicate<Path> condition) {
@@ -21,5 +23,19 @@ public class Search {
             e.printStackTrace();
         }
         return searcher.getPaths();
+    }
+
+    public static boolean validate(String[] args) {
+        boolean rsl = true;
+        if (args.length < 2) {
+            throw new IllegalArgumentException("Root folder or file extension is null");
+        }
+        if (!Paths.get(args[0]).toFile().exists()) {
+            throw new IllegalArgumentException(String.format("Not exists %s", Paths.get(args[0]).toFile().getAbsoluteFile()));
+        }
+        if (!Paths.get(args[0]).toFile().isDirectory()) {
+            throw new IllegalArgumentException(String.format("Not directory %s", Paths.get(args[0]).toFile().getAbsoluteFile()));
+        }
+        return rsl;
     }
 }
