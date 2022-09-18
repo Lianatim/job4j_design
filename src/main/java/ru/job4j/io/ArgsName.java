@@ -16,6 +16,7 @@ public class ArgsName {
 
     private void parse(String[] args) {
         for (String arg : args) {
+            validate(arg);
             String[] pair = arg.split("=", 2);
             values.put(pair[0].substring(1), pair[1]);
         }
@@ -23,30 +24,24 @@ public class ArgsName {
 
     public static ArgsName of(String[] args) {
         ArgsName names = new ArgsName();
-        if (validate(args)) {
-            names.parse(args);
-        }
-        return names;
-    }
-
-    public static boolean validate(String[] args) {
-        boolean rsl = true;
         if (args.length == 0) {
             throw new IllegalArgumentException("Arguments are empty");
         }
-        for (String arg : args) {
-            if (!arg.contains("=")) {
-                throw new IllegalArgumentException("The key - value pair must contain the character \"=\"");
-            }
-            String[] pair = arg.split("=", 2);
-            if (pair[0].length() == 0 || pair[0].length() == 1) {
-                throw new IllegalArgumentException("The key - value pair must contain the key");
-            }
-            if (!pair[0].startsWith("-")) {
-                throw new IllegalArgumentException("The key  must start with the character \"-\"");
-            }
+        names.parse(args);
+        return names;
+    }
+
+    public static void validate(String arg) {
+        if (!arg.contains("=")) {
+            throw new IllegalArgumentException("The key - value pair " + arg + " must contain the character \"=\"");
         }
-        return rsl;
+        if (arg.startsWith("-=") || arg.startsWith("=") || arg.indexOf("=") == arg.length() - 1) {
+            throw new IllegalArgumentException("The key - value pair " + arg + " must contain the key");
+        }
+        if (!arg.startsWith("-")) {
+            throw new IllegalArgumentException("The key - value pair " + arg + " must start with the character \"-\"");
+        }
+
     }
 
     public static void main(String[] args) {

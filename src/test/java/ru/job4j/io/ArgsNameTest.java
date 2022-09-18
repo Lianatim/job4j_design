@@ -36,19 +36,25 @@ class ArgsNameTest {
 
     @Test
     void whenKeyEmpty() {
-        assertThatThrownBy(() -> ArgsName.of(new String[]{"-=512"}))
-                .isInstanceOf(IllegalArgumentException.class);
+        String[] args = new String[]{"-=512"};
+        assertThatThrownBy(() -> ArgsName.of(args))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("The key - value pair " + args[0] + " must contain the key");
     }
 
     @Test
     void whenSymbolEmpty() {
+        String[] args = new String[]{"-Xmx512"};
         assertThatThrownBy(() -> ArgsName.of(new String[]{"-Xmx512"}))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("The key - value pair " + args[0] + " must contain the character \"=\"");
     }
 
     @Test
     void whenSymbolKeyEmpty() {
+        String[] args = new String[]{"Xmx=512"};
         assertThatThrownBy(() -> ArgsName.of(new String[]{"Xmx=512"}))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("The key - value pair " + args[0] + " must start with the character \"-\"");
     }
 }
