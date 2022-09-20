@@ -1,0 +1,10 @@
+Welcome to the chat. This chat has three commands: OUT, STOP, CONTINUE. Please enter a message: 
+hi
+было в Одессе.
+go
+было в Одессе.
+стоп
+продолжить
+Chat resumed 
+закончить
+декабрый.
