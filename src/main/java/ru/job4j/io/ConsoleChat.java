@@ -24,6 +24,7 @@ public class ConsoleChat {
         saveChat.add(greeting);
         System.out.println(greeting);
         boolean readAnswer = true;
+        List<String> tmp = readPhrases();
         try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
             String line = "";
             while (!OUT.equals(line)) {
@@ -42,7 +43,7 @@ public class ConsoleChat {
                     }
                     default -> {
                         if (readAnswer) {
-                            String answer = getAnswer();
+                            String answer = tmp.get(new Random().nextInt(readPhrases().size()));
                             saveChat.add(answer);
                             System.out.println(answer);
                         }
@@ -52,10 +53,6 @@ public class ConsoleChat {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private String getAnswer() {
-        return readPhrases().get(new Random().nextInt(readPhrases().size()));
     }
 
     private List<String> readPhrases() {
