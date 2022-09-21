@@ -43,7 +43,7 @@ public class ConsoleChat {
                     }
                     default -> {
                         if (readAnswer) {
-                            String answer = tmp.get(new Random().nextInt(readPhrases().size()));
+                            String answer = tmp.get(new Random().nextInt(tmp.size()));
                             saveChat.add(answer);
                             System.out.println(answer);
                         }
