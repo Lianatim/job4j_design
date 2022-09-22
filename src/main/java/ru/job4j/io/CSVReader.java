@@ -49,10 +49,14 @@ public class CSVReader {
     }
 
     private static void saveCSV(List<String> rsl, ArgsName argsName) {
-        try (PrintWriter out = new PrintWriter(new BufferedOutputStream(new FileOutputStream(argsName.get("out"))))) {
-            rsl.forEach(out::println);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        if ("stdout".equals(argsName.get("out"))) {
+            rsl.forEach(System.out::println);
+        } else {
+            try (PrintWriter out = new PrintWriter(new BufferedOutputStream(new FileOutputStream(argsName.get("out"))))) {
+                rsl.forEach(out::println);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -69,7 +73,7 @@ public class CSVReader {
         if (!Files.exists(Paths.get(argsName.get("path")))) {
             throw new IllegalArgumentException(String.format("Not directory %s", argsName.get("path")));
         }
-        if (!argsName.get("delimiter").equals(";")) {
+        if (!";".equals(argsName.get("delimiter"))) {
             throw new IllegalArgumentException(String.format("Invalid CSV delimiter %s", argsName.get("delimiter")));
         }
         if (argsName.get("out").isEmpty()) {
