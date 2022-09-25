@@ -53,7 +53,7 @@ public class PhoneNumber {
         return numbers;
     }
 
-    static class People {
+    public static class People {
         private final int passportNumber;
 
         public People(int passportNumber) {
@@ -65,6 +65,10 @@ public class PhoneNumber {
             return "People{"
                     + "passportNumber=" + passportNumber
                     + '}';
+        }
+
+        public int getPassportNumber() {
+            return passportNumber;
         }
     }
 
