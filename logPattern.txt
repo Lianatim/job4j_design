@@ -1,0 +1,13 @@
+/Users/lianatimirgazina/IdeaProjects/job4j_design/target/site/jacoco/jacoco-resources/sort.js
+/Users/lianatimirgazina/IdeaProjects/job4j_design/target/site/jacoco/jacoco-resources/prettify.js
+/Users/lianatimirgazina/IdeaProjects/job4j_tracker/target/site/jacoco/jacoco-resources/sort.js
+/Users/lianatimirgazina/IdeaProjects/job4j_tracker/target/site/jacoco/jacoco-resources/prettify.js
+/Users/lianatimirgazina/IdeaProjects/job4j_tracker/target/site/apidocs/tag-search-index.js
+/Users/lianatimirgazina/IdeaProjects/job4j_tracker/target/site/apidocs/module-search-index.js
+/Users/lianatimirgazina/IdeaProjects/job4j_tracker/target/site/apidocs/package-search-index.js
+/Users/lianatimirgazina/IdeaProjects/job4j_tracker/target/site/apidocs/member-search-index.js
+/Users/lianatimirgazina/IdeaProjects/job4j_tracker/target/site/apidocs/script.js
+/Users/lianatimirgazina/IdeaProjects/job4j_tracker/target/site/apidocs/script-dir/jquery-ui.min.js
+/Users/lianatimirgazina/IdeaProjects/job4j_tracker/target/site/apidocs/script-dir/jquery-3.5.1.min.js
+/Users/lianatimirgazina/IdeaProjects/job4j_tracker/target/site/apidocs/type-search-index.js
+/Users/lianatimirgazina/IdeaProjects/job4j_tracker/target/site/apidocs/search.js
