@@ -1,19 +1,21 @@
 package ru.job4j.serialization.json;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class PhoneNumber {
-    private final boolean isRobot;
+    private final boolean robot;
     private final int phoneNumber;
     private final String name;
     private final People people;
     private final String[] numbers;
 
     public PhoneNumber(boolean isRobot, int phoneNumber, String name, People people, String[] numbers) {
-        this.isRobot = isRobot;
+        this.robot = isRobot;
         this.phoneNumber = phoneNumber;
         this.name = name;
         this.people = people;
@@ -23,12 +25,32 @@ public class PhoneNumber {
     @Override
     public String toString() {
         return "PhoneNumber{"
-                + "isRobot=" + isRobot
+                + "isRobot=" + robot
                 + ", phoneNumber=" + phoneNumber
                 + ", name='" + name + '\''
                 + ", people=" + people
                 + ", numbers=" + Arrays.toString(numbers)
                 + '}';
+    }
+
+    public boolean isRobot() {
+        return robot;
+    }
+
+    public int getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public People getPeople() {
+        return people;
+    }
+
+    public String[] getNumbers() {
+        return numbers;
     }
 
     static class People {
@@ -47,24 +69,25 @@ public class PhoneNumber {
     }
 
     public static void main(String[] args) {
+        JSONObject jsonPeople = new JSONObject("{\"passportNumber\":\"51239002\"}");
+
+        List<String> list = new ArrayList<>();
+        list.add("1");
+        list.add("2");
+        JSONArray jsonNumbers = new JSONArray(list);
+
         final PhoneNumber phoneNumber = new PhoneNumber(false, 555355, "Mike",
                 new People(51239002), new String[] {"1, 2"});
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("isRobot", phoneNumber.isRobot());
+        jsonObject.put("phoneNumber", phoneNumber.getPhoneNumber());
+        jsonObject.put("name", phoneNumber.getName());
+        jsonObject.put("people", jsonPeople);
+        jsonObject.put("numbers", jsonNumbers);
 
-        final Gson gson = new GsonBuilder().create();
-        System.out.println(gson.toJson(phoneNumber));
+        System.out.println(jsonObject.toString());
 
-        final String phoneNumberJson =
-                "{"
-                        + "\"isRobot\":false,"
-                        + "\"phoneNumber\":555355,"
-                        + "\"people\":"
-                        + "{"
-                        + "\"passportNumber\":\"51239002\""
-                        + "},"
-                        + "\"numbers\":"
-                        + "[\"1\",\"2\"]"
-                        + "}";
-        final PhoneNumber phoneNumberMod = gson.fromJson(phoneNumberJson, PhoneNumber.class);
-        System.out.println(phoneNumberMod);
+        System.out.println(new JSONObject(phoneNumber).toString());
+
     }
 }
