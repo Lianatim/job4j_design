@@ -13,13 +13,13 @@ public class SearchFilesPattern {
         Predicate<Path> regex = p -> p.toFile().getName()
                 .matches(argsName.get("n"));
         Predicate<Path> name = p -> p.toFile().getName()
-                .endsWith(argsName.get("n"));
+                .equals(argsName.get("n"));
         Predicate<Path> mask = p -> p.toFile().getName()
                 .matches(argsName.get("n").replace(".", "[.]")
                         .replace("*", ".+")
                         .replace("?", "."));
 
-        return argsName.get("t").equals("name") ? name : argsName.get("t").equals("regex") ? regex : mask;
+        return "name".equals(argsName.get("t")) ? name : "regex".equals(argsName.get("t")) ? regex : mask;
     }
 
     private void saveLog(List<Path> log, ArgsName argsName) {
@@ -62,7 +62,7 @@ public class SearchFilesPattern {
             throw new IllegalArgumentException("The type of pattern is empty");
         }
         if (argsName.get("o").isEmpty()) {
-            throw new IllegalArgumentException("The sve file is empty");
+            throw new IllegalArgumentException("The save file is empty");
         }
     }
 }
