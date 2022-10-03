@@ -56,3 +56,11 @@ where t.name = 'кисломолочные' or t.name ='выпечка';
 select t.name as "Тип продукта", count(t.name) Количество
 from product pr
 join type t on pr.type_id=t.id
+group by t.name
+having count(t.name) < 2;
+
+--Вывести все продукты и их тип.
+select pr.name as "Название продукта", t.name as "Тип продукта",
+pr.expired_date as "Срок годности", pr.price Цена
+from product pr
+join type t on pr.type_id=t.id;
