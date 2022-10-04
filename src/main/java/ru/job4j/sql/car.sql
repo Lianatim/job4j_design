@@ -37,13 +37,6 @@ values ('Mercedes-Benz', 5, 2, 2),
 ;
 
 --Вывести список всех машин и все привязанные к ним детали.
-select cc.id Ключ, cc.name as "Название машины", b.name as "Тип кузова",
-e.name as "Тип двигателя", t.name as "Тип коробки передач" from cars cc
-left join body b on cc.body_id=b.id
-left join engine e on cc.engine_id=e.id
-left join transmission t on cc.transmission_id=t.id;
-
---Вывести список всех машин и все привязанные к ним детали.
 select
 cc.id Ключ,
 cc.name as "Название машины",
