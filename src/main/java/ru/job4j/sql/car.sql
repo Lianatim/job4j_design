@@ -39,31 +39,43 @@ values ('Mercedes-Benz', 5, 2, 2),
 --Вывести список всех машин и все привязанные к ним детали.
 select cc.id Ключ, cc.name as "Название машины", b.name as "Тип кузова",
 e.name as "Тип двигателя", t.name as "Тип коробки передач" from cars cc
-full join body b on cc.body_id=b.id
-full join engine e on cc.engine_id=e.id
-full join transmission t on cc.transmission_id=t.id;
+left join body b on cc.body_id=b.id
+left join engine e on cc.engine_id=e.id
+left join transmission t on cc.transmission_id=t.id;
+
+--Вывести список всех машин и все привязанные к ним детали.
+select
+cc.id Ключ,
+cc.name as "Название машины",
+b.name as "Тип кузова",
+e.name as "Тип двигателя",
+t.name as "Тип коробки передач"
+from cars cc
+left join body b on cc.body_id=b.id
+left join engine e on cc.engine_id=e.id
+left join transmission t on cc.transmission_id=t.id;
 
 --Вывести кузовы, которые не используются НИ в одной машине.
-select cc.id Ключ, cc.name as "Название машины", b.name as "Тип кузова",
-e.name as "Тип двигателя", t.name as "Тип коробки передач" from cars cc
-full join body b on cc.body_id=b.id
-full join engine e on cc.engine_id=e.id
-full join transmission t on cc.transmission_id=t.id
+select cc.id Ключ,
+cc.name as "Название машины",
+b.name as "Тип кузова"
+from cars cc
+right join body b on cc.body_id=b.id
 where b.name is not null and cc.name is null;
 
 --Вывести двигатели, которые не используются НИ в одной машине
-select cc.id Ключ, cc.name as "Название машины", b.name as "Тип кузова",
-e.name as "Тип двигателя", t.name as "Тип коробки передач" from cars cc
-full join body b on cc.body_id=b.id
-full join engine e on cc.engine_id=e.id
-full join transmission t on cc.transmission_id=t.id
+select cc.id Ключ,
+cc.name as "Название машины",
+e.name as "Тип двигателя"
+from cars cc
+right join engine e on cc.engine_id=e.id
 where e.name is not null and cc.name is null;
 
 --Вывести коробки передач, которые не используются НИ в одной машине
-select cc.id Ключ, cc.name as "Название машины", b.name as "Тип кузова",
-e.name as "Тип двигателя", t.name as "Тип коробки передач" from cars cc
-full join body b on cc.body_id=b.id
-full join engine e on cc.engine_id=e.id
-full join transmission t on cc.transmission_id=t.id
+select cc.id Ключ,
+cc.name as "Название машины",
+t.name as "Тип коробки передач"
+from cars cc
+right join transmission t on cc.transmission_id=t.id
 where t.name is not null and cc.name is null;
 
