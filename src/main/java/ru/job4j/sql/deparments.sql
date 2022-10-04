@@ -15,7 +15,7 @@ values ('Бухгалтерия'), ('IT'), ('Руководство'),
 
 insert into employees(name, deparments_id)
 values ('employees 1', 1), ('employees 2', 2), ('employees 3', 3),
-('employees 4', null), ('employees 5', 4), ('employees 6', 5),
+(null, null), ('employees 5', 4), ('employees 6', 5),
 ('employees 7', 6);
 
 
@@ -57,5 +57,5 @@ left join deparments d on e.deparments_id = d.id;
 select * from employees e cross join deparments d;
 
 --Используя left join найти департаменты, у которых нет работников
-select * from employees e left join deparments d on e.deparments_id = d.id
+select * from deparments d  left join employees e on e.deparments_id = d.id
 where e.name is null;
