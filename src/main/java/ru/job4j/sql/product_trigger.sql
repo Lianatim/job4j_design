@@ -62,7 +62,7 @@ create or replace function history_trigger()
 $$
     BEGIN
       insert into history_of_price(name, price, date)
-      values(NEW.name, NEW.price, date(current_date));
+      values(NEW.name, NEW.price, current_date);
       return NEW;
     END;
 $$
