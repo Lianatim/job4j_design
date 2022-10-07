@@ -46,9 +46,7 @@ create or replace procedure delete_data(d_id integer)
 language 'plpgsql'
 as $$
    BEGIN
-      if d_id > 5 THEN
-          delete from products where id = 3;
-      end if;
+         delete from products where id = d_id;
    END;
 $$;
 
@@ -105,7 +103,7 @@ select f_insert_data('product_3', 'producer_3', 8, 115);
 select f_update_data(0, 0.2, 0);
 
 --процедура для удаления записей в таблице на функцию
-create or replace function d_delete_data(d_count integer, d_id integer)
+create or replace function d_delete_data(d_count integer)
 returns integer
 language 'plpgsql'
 as
@@ -113,15 +111,14 @@ $$
     declare
         result integer;
     begin
-        if d_count = 0 THEN
-             delete from products where count=0;
-        end if;
-		return result;
+	     select into result (select count (*) from products where count = 0);
+         delete from products where count=0;
+	     return result;
     end;
 $$;
 
-select d_delete_data(5, 0);
+select d_delete_data(5);
 select f_insert_data('product_5', 'producer_6', 0, 32);
 select * from products;
-select d_delete_data(0, 0);
+select d_delete_data(0);
 select * from products;
