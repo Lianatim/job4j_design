@@ -111,7 +111,7 @@ $$
     declare
         result integer;
     begin
-	     select into result (select count (*) from products where count = 0);
+	     select into result count (*) from products where count = d_count;
          delete from products where count=0;
 	     return result;
     end;
