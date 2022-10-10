@@ -18,60 +18,47 @@ public class TableEditor implements AutoCloseable {
     }
 
     private void initConnection() throws SQLException, ClassNotFoundException {
-        Class.forName("org.postgresql.Driver");
-        String url = "jdbc:postgresql://localhost:5432/idea_db";
-        String login = "postgres";
-        String password = "password";
+        Class.forName(properties.getProperty("hibernate.connection.driver_class"));
+        String url = properties.getProperty("hibernate.connection.url");
+        String login = properties.getProperty("hibernate.connection.username");
+        String password = properties.getProperty("hibernate.connection.password");
         connection = DriverManager.getConnection(url, login, password);
     }
 
-    public void createTable(String tableName) {
+    private void createStatement(String request) {
         try (var statement = connection.createStatement()) {
-            statement.execute(String.format(
-                    "create table %s (%s);", tableName, "id serial primary key"));
+            statement.execute(request);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void createTable(String tableName) {
+        createStatement(String.format("create table %s (%s);", tableName, "id serial primary key"));
     }
 
     public void dropTable(String tableName) {
-        try (var statement = connection.createStatement()) {
-            statement.execute(String.format(
-                    "drop table %s;", tableName
-            ));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        createStatement(String.format(
+                "drop table %s;", tableName
+        ));
     }
 
     public void addColumn(String tableName, String columnName, String type) {
-        try (var statement = connection.createStatement()) {
-            statement.execute(String.format(
-                    "alter table %s add column %s %s;", tableName, columnName, type
-            ));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        createStatement(String.format(
+                "alter table %s add column %s %s;", tableName, columnName, type
+        ));
     }
 
     public void dropColumn(String tableName, String columnName) {
-        try (var statement = connection.createStatement()) {
-            var dropColumn = statement.execute(String.format(
-                    "alter table %s drop column %s;", tableName, columnName
-            ));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        createStatement(String.format(
+                "alter table %s drop column %s;", tableName, columnName
+        ));
     }
 
     public void renameColumn(String tableName, String columnName, String newColumnName) {
-        try (var statement = connection.createStatement()) {
-            statement.execute(String.format(
-                    "alter table %s rename column %s to %s;", tableName, columnName, newColumnName
-            ));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        createStatement(String.format(
+                "alter table %s rename column %s to %s;", tableName, columnName, newColumnName
+        ));
     }
 
 
