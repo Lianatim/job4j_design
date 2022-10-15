@@ -24,20 +24,10 @@ public class ImportDB {
         try (BufferedReader rd = new BufferedReader(new FileReader(dump))) {
             for (String line = rd.readLine(); line != null; line = rd.readLine()) {
                 String[] tmp = line.split(";");
-                String name = "";
-                String mail = "";
-                if (tmp.length != 2 || tmp[0].contains(";") || tmp[1].contains(";")) {
+                if (tmp.length != 2 || tmp[0].isBlank() || tmp[1].isBlank() || !tmp[1].contains("@")) {
                     throw new IllegalArgumentException("The file must contain two non-empty elements");
-                } else {
-                    for (String data : tmp) {
-                        if (data.contains("@")) {
-                            mail = data;
-                        } else {
-                            name = data;
-                        }
-                    }
-                    users.add(new User(name, mail));
                 }
+                users.add(new User(tmp[0], tmp[1]));
             }
         }
         return users;
