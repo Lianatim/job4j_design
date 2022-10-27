@@ -12,6 +12,6 @@ public class Final {
         System.out.println(" ");
         System.out.println("ZGC - MergeSort: " + String.format("%.4f", (05.609973 - 05.603733)));
         System.out.println("ZGC - BubbleSort: " + String.format("%.4f", (08.011482 - 06.797059)));
-        System.out.println("ZGC - InsertSort: " + String.format("%.4f", (07.177600 - 06.983412 )));
+        System.out.println("ZGC - InsertSort: " + String.format("%.4f", (07.177600 - 06.983412)));
     }
 }
