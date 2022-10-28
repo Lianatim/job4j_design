@@ -7,12 +7,12 @@ import java.util.Random;
 
 public class UserGenerator implements Generate {
 
-    public final String pathNames = "src/main/java/ru/job4j/gc/leak/files/names.txt";
-    public final String pathSurnames = "src/main/java/ru/job4j/gc/leak/files/surnames.txt";
-    public final String pathPatrons = "src/main/java/ru/job4j/gc/leak/files/patr.txt";
+    public static final String PATH_NAMES = "src/main/java/ru/job4j/gc/leak/files/names.txt";
+    public static final String PATH_SURNAMES = "src/main/java/ru/job4j/gc/leak/files/surnames.txt";
+    public static final String PATH_PATRONS = "src/main/java/ru/job4j/gc/leak/files/patr.txt";
 
-    public final String separator = " ";
-    public final int newUsers = 1000;
+    public static final String SEPARATOR = " ";
+    public static final int NEW_USERS = 1000;
 
     public List<String> names;
     public List<String> surnames;
@@ -28,12 +28,12 @@ public class UserGenerator implements Generate {
     @Override
     public void generate() {
         users.clear();
-        for (int i = 0; i < newUsers; i++) {
+        for (int i = 0; i < NEW_USERS; i++) {
             String user = String.valueOf(new StringBuilder()
                     .append(surnames.get(random.nextInt(surnames.size())))
-                    .append(separator)
+                    .append(SEPARATOR)
                     .append(names.get(random.nextInt(names.size())))
-                    .append(separator)
+                    .append(SEPARATOR)
                     .append(patrons.get(random.nextInt(patrons.size()))));
             users.add(new User(user));
         }
@@ -41,9 +41,9 @@ public class UserGenerator implements Generate {
 
     private void readAll() {
         try {
-            names = read(pathNames);
-            surnames = read(pathSurnames);
-            patrons = read(pathPatrons);
+            names = read(PATH_NAMES);
+            surnames = read(PATH_SURNAMES);
+            patrons = read(PATH_PATRONS);
         } catch (IOException e) {
             throw new IllegalArgumentException(e);
         }
