@@ -14,11 +14,9 @@ public class ReportHR implements Report {
 
     private static final Comparator<Employee> COMPARATOR = (o1, o2) -> Double.compare(o2.getSalary(), o1.getSalary());
     private final Store store;
-    private final DateTimeParser<Calendar> dateTimeParser;
 
-    public ReportHR(Store store, DateTimeParser<Calendar> dateTimeParser) {
+    public ReportHR(Store store) {
         this.store = store;
-        this.dateTimeParser = dateTimeParser;
     }
 
     @Override

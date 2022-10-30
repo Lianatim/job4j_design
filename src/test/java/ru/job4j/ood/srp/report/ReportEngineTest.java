@@ -40,11 +40,10 @@ public class ReportEngineTest {
         Employee worker = new Employee("Ivan", 100);
         Employee worker2 = new Employee("Ivan2", 200);
         Employee worker3 = new Employee("Ivan3", 150);
-        DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         store.add(worker);
         store.add(worker2);
         store.add(worker3);
-        Report engine = new ReportHR(store, parser);
+        Report engine = new ReportHR(store);
         StringBuilder expect = new StringBuilder()
                 .append("Name; Salary;")
                 .append(System.lineSeparator())
