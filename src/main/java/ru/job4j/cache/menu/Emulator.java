@@ -1,4 +1,6 @@
-package ru.job4j.cache;
+package ru.job4j.cache.menu;
+
+import ru.job4j.cache.DirFileCache;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -18,6 +20,7 @@ public class Emulator {
     public static final String MENU = """
                 Введите 1, если необходимо кэшировать файл из директории.
                 Введите 2, чтобы получить содержимое файла.
+                Введите любое другое число для выхода из программы.
             """;
 
     public static void main(String[] args) {
