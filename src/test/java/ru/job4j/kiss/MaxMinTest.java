@@ -5,9 +5,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import org.junit.jupiter.api.BeforeEach;
 
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 class MaxMinTest {
 
@@ -31,5 +29,12 @@ class MaxMinTest {
         MaxMin min = new MaxMin();
         List<Integer> search = Arrays.asList(4, 6, 3, 2, 9, 1);
         assertThat(min.min(search, comparator)).isEqualTo(1);
+    }
+
+    @Test
+    void whenListIsNull() {
+        MaxMin min = new MaxMin();
+        List<Integer> search = Collections.emptyList();
+        assertThat(min.findValue(search, comparator)).isNull();
     }
 }

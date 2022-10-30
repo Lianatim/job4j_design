@@ -13,6 +13,9 @@ public class MaxMin {
     }
 
     public <T> T findValue(List<T> value, Comparator<T> comparator) {
+        if (value.isEmpty()) {
+            return null;
+        }
         T max = value.get(0);
         for (T t : value) {
             max = (comparator.compare(t, max) > 0) ? t : max;
