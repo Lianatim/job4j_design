@@ -3,6 +3,7 @@ package ru.job4j.cache.menu;
 import ru.job4j.cache.DirFileCache;
 
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
@@ -27,7 +28,7 @@ public class Emulator {
         Scanner scanner = new Scanner(System.in);
         System.out.println(DIR_PATH);
         String dir = scanner.nextLine();
-        if (!Files.exists(Paths.get(dir))) {
+        if (!Files.exists(Path.of(dir))) {
             throw new IllegalArgumentException(String.format("Directory %s doesn't exist", dir));
         }
         DirFileCache dirFileCache = new DirFileCache(dir);
@@ -40,7 +41,7 @@ public class Emulator {
             if (ADD_PATH == userChoice) {
                 System.out.println(FILE);
                 String key = scanner.nextLine();
-                if (!Files.exists(Paths.get(String.format("%s%s", dir, key)))) {
+                if (!Files.exists(Path.of(dir, key))) {
                     throw new IllegalArgumentException(String.format("File %s doesn't exist in this directory", key));
                 }
                 dirFileCache.put(key, dirFileCache.get(key));
