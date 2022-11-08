@@ -13,18 +13,19 @@ import java.util.function.Predicate;
 
 public class ReportXML implements Report {
     private final Store store;
+    private final JAXBContext context;
+    private final Marshaller marshaller;
 
-    public ReportXML(Store store) {
+    public ReportXML(Store store) throws JAXBException {
         this.store = store;
+        this.context = JAXBContext.newInstance(Employees.class);
+        this.marshaller = context.createMarshaller();
     }
 
     @Override
     public String generate(Predicate<Employee> filter) {
         String xml;
-        Marshaller marshaller = null;
         try {
-            JAXBContext context = JAXBContext.newInstance(Employees.class);
-            marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
         } catch (JAXBException e) {
             e.printStackTrace();

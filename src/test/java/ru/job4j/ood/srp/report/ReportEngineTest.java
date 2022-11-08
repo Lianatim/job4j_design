@@ -9,6 +9,7 @@ import ru.job4j.ood.srp.formatter.ReportDateTimeParser;
 import ru.job4j.ood.srp.model.Employee;
 import ru.job4j.ood.srp.store.MemStore;
 
+import javax.xml.bind.JAXBException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -105,9 +106,8 @@ public class ReportEngineTest {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
-        DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         store.add(worker);
-        Report engine = new ReportJSON(store, parser);
+        Report engine = new ReportJSON(store);
         StringBuilder expect = new StringBuilder();
         expect.append("[")
                 .append("{")
@@ -164,10 +164,14 @@ public class ReportEngineTest {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
-        DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         store.add(worker);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
-        Report engine = new ReportXML(store);
+        Report engine = null;
+        try {
+            engine = new ReportXML(store);
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
         StringBuilder expect = new StringBuilder()
                 .append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")
                 .append(String.format("%n%s%n", "<Employees>"))
